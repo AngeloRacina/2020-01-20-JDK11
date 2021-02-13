@@ -31,7 +31,7 @@ public class ArtsmiaController {
     private Button btnCalcolaPercorso;
 
     @FXML
-    private ComboBox<?> boxRuolo;
+    private ComboBox<String> boxRuolo;
 
     @FXML
     private TextField txtArtista;
@@ -54,11 +54,18 @@ public class ArtsmiaController {
     @FXML
     void doCreaGrafo(ActionEvent event) {
     	txtResult.clear();
-    	txtResult.appendText("Crea grafo");
+    	
+    	String ruolo = this.boxRuolo.getValue();
+    	this.model.creaGrafo(ruolo);
+    	
+    	txtResult.appendText("Grafo creato: \n"
+    			+ "#vertici: "+ model.nVertices()+"\n"+
+    			"#archi: "+model.nEdges());
     }
 
     public void setModel(Model model) {
     	this.model = model;
+    	this.boxRuolo.getItems().addAll(this.model.getRoles());
     }
 
     
